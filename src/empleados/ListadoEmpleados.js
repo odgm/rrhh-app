@@ -1,6 +1,24 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 
 export default function ListadoEmpleados() {
+
+    const urlBase = "http://localhost:8080/rrhh-app/empleados";
+
+    
+    const[empleados, setEmpleados] = useState([]);
+
+    useEffect( () => {
+        cargarEmpleados();
+    }, [] );
+
+    const cargarEmpleados = async () => {
+        const resultado = await axios.get(urlBase);
+        console.log("Resultado de Cargar Empleados");
+        console.log(resultado.data);
+        setEmpleados(resultado.data);
+    }
+
     return (
         <div className="container">
             <div className="container text-center" style={{ margin: "30px" }}>
